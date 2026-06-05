@@ -37,11 +37,16 @@ package-lock.json
 Thumbs.db
 desktop.ini
 
-# OpenCode / IDE cache
+# OpenCode / IDE cache (definitively excluded)
 .sixth/
+**/.sixth/
+**/.sixth/**
+/.sixth/
 
-# GitHub modernization hooks (opencode local, not for repo)
+# GitHub modernization hooks (opencode local, definitively excluded)
 .github/modernize/
+**/.github/modernize/
+**/.github/modernize/**
 
 # Logs
 *.log
