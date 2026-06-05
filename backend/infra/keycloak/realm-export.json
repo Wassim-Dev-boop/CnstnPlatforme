@@ -1,0 +1,314 @@
+{
+  "realm": "cnstn-intranet",
+  "enabled": true,
+  "displayName": "CNSTN Intranet",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "registrationEmailAsUsername": false,
+  "accessTokenLifespan": 900,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 28800,
+  "clientSessionIdleTimeout": 1800,
+  "clientSessionMaxLifespan": 28800,
+  "roles": {
+    "realm": [
+      {
+        "name": "ADMIN"
+      },
+      {
+        "name": "EMPLOYE"
+      },
+      {
+        "name": "CHEF_HIERARCHIQUE"
+      },
+      {
+        "name": "RESPONSABLE_SALLE"
+      },
+      {
+        "name": "RESPONSABLE_SECURITE"
+      },
+      {
+        "name": "DIRECTEUR_DSN"
+      },
+      {
+        "name": "RESPONSABLE_QUALITE"
+      },
+      {
+        "name": "RESPONSABLE_IT"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "cnstn-frontend-spa",
+      "name": "CNSTN Frontend SPA",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "http://localhost:4200/*",
+        "http://127.0.0.1:4200/*",
+        "http://host.docker.internal:4200/*"
+      ],
+      "webOrigins": [
+        "http://localhost:4200",
+        "http://127.0.0.1:4200",
+        "http://host.docker.internal:4200"
+      ],
+      "protocolMappers": [
+        {
+          "name": "realm roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "id.token.claim": "true",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "cnstn-api-gateway",
+      "name": "CNSTN API Gateway",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "gateway-secret",
+      "standardFlowEnabled": false,
+      "serviceAccountsEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "protocolMappers": [
+        {
+          "name": "realm roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "id.token.claim": "true",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "cnstn-admin-cli",
+      "name": "CNSTN Admin Service Client",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "admin-cli-secret",
+      "standardFlowEnabled": false,
+      "serviceAccountsEnabled": true,
+      "directAccessGrantsEnabled": false
+    },
+    {
+      "clientId": "cnstn-postman",
+      "name": "CNSTN Postman Client",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": false,
+      "serviceAccountsEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "webOrigins": [
+        "http://localhost:4200",
+        "http://127.0.0.1:4200",
+        "http://host.docker.internal:4200"
+      ],
+      "protocolMappers": [
+        {
+          "name": "realm roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "id.token.claim": "true",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "admin.cnstn",
+      "enabled": true,
+      "email": "admin@cnstn.tn",
+      "firstName": "Admin",
+      "lastName": "CNSTN",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Admin@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "username": "employe.cnstn",
+      "enabled": true,
+      "email": "employe@cnstn.tn",
+      "firstName": "Employe",
+      "lastName": "CNSTN",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "EMPLOYE"
+      ]
+    },
+    {
+      "username": "chef.cnstn",
+      "enabled": true,
+      "email": "chef@cnstn.tn",
+      "firstName": "Chef",
+      "lastName": "Hierarchique",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "CHEF_HIERARCHIQUE"
+      ]
+    },
+    {
+      "username": "salle.cnstn",
+      "enabled": true,
+      "email": "salle@cnstn.tn",
+      "firstName": "Responsable",
+      "lastName": "Salle",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "RESPONSABLE_SALLE"
+      ]
+    },
+    {
+      "username": "securite.cnstn",
+      "enabled": true,
+      "email": "securite@cnstn.tn",
+      "firstName": "Responsable",
+      "lastName": "Securite",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "RESPONSABLE_SECURITE"
+      ]
+    },
+    {
+      "username": "directeur.cnstn",
+      "enabled": true,
+      "email": "directeur@cnstn.tn",
+      "firstName": "Directeur",
+      "lastName": "DSN",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "DIRECTEUR_DSN"
+      ]
+    },
+    {
+      "username": "qualite.cnstn",
+      "enabled": true,
+      "email": "qualite@cnstn.tn",
+      "firstName": "Responsable",
+      "lastName": "Qualite",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "RESPONSABLE_QUALITE"
+      ]
+    },
+    {
+      "username": "it.cnstn",
+      "enabled": true,
+      "email": "it@cnstn.tn",
+      "firstName": "Referent",
+      "lastName": "DSN",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "DIRECTEUR_DSN"
+      ]
+    },
+    {
+      "username": "service-account-cnstn-admin-cli",
+      "enabled": true,
+      "serviceAccountClientId": "cnstn-admin-cli",
+      "clientRoles": {
+        "realm-management": [
+          "view-users",
+          "query-users",
+          "manage-users",
+          "view-realm",
+          "manage-realm"
+        ]
+      }
+    },
+    {
+      "id": null,
+      "username": "responsable_it.cnstn",
+      "enabled": true,
+      "email": "responsable_it@cnstn.tn",
+      "firstName": "Responsable",
+      "lastName": "IT",
+      "emailVerified": false,
+      "realmRoles": [
+        "RESPONSABLE_IT"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "User@12345",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+app:
+  keycloak:
+    server-url: http://keycloak:8080
+    realm: cnstn-intranet
+    admin-realm: cnstn-intranet
+    client-id: cnstn-admin-cli
+    client-secret: admin-cli-secret
+    login-client-id: cnstn-postman
+    login-client-secret: ""
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/auth_user_db
+    username: postgres
+    password: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://host.docker.internal:8090/realms/cnstn-intranet}

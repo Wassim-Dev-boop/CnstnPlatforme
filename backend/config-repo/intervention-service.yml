@@ -1,0 +1,29 @@
+server:
+  port: 8085
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/intervention_db
+    username: postgres
+    password: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://host.docker.internal:8090/realms/cnstn-intranet}
+
+app:
+  notification:
+    base-url: ${NOTIFICATION_SERVICE_URL:http://notification-service:8086}
+    internal-api-key: ${NOTIFICATION_INTERNAL_API_KEY:change-me}
+  auth-user:
+    base-url: ${AUTH_USER_SERVICE_URL:http://auth-user-service:8081}
+    internal-api-key: ${AUTH_USER_INTERNAL_API_KEY:${NOTIFICATION_INTERNAL_API_KEY:change-me}}
+  intervention:
+    room-manager-recipients:
+      - ${INTERVENTION_ROOM_MANAGER_USERNAME:salle.cnstn}
+    it-manager-recipients:
+      - ${INTERVENTION_MANAGER_USERNAME:chef.cnstn}
+    dsn-recipients:
+      - ${INTERVENTION_DSN_USERNAME:directeur.cnstn}
+    it-responsible-recipients:
+      - ${INTERVENTION_DSN_REFERENT_USERNAME:it.cnstn}

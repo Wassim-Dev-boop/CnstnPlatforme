@@ -1,0 +1,40 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+spring:
+  application:
+    name: ged-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/ged_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8090/realms/cnstn-intranet}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  auth-user:
+    base-url: ${AUTH_USER_SERVICE_URL:http://localhost:8081}
+    internal-api-key: ${AUTH_USER_INTERNAL_API_KEY:${NOTIFICATION_INTERNAL_API_KEY:change-me}}

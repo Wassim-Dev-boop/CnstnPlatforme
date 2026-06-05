@@ -1,0 +1,58 @@
+# syntax=docker/dockerfile:1.6
+
+# ============================================================================
+# Multi-stage Dockerfile for CNSTN services
+# ============================================================================
+# Stage 1 (builder): compile the service with Maven using BuildKit cache mounts
+# Stage 2 (runtime): copy the produced Spring Boot JAR to a slim JRE image
+#
+# This guarantees that every `docker compose build` produces an image with
+# the latest SQL migrations and Java sources - NO stale prebuilt JARs.
+# ============================================================================
+
+FROM maven:3.9.9-eclipse-temurin-21 AS builder
+WORKDIR /build
+
+# Copy parent POM first
+COPY pom.xml ./
+
+# Copy all module POMs so the Maven reactor can resolve them
+COPY auth-user-service/pom.xml       ./auth-user-service/
+COPY event-service/pom.xml           ./event-service/
+COPY ged-service/pom.xml             ./ged-service/
+COPY reservation-service/pom.xml     ./reservation-service/
+COPY intervention-service/pom.xml    ./intervention-service/
+COPY notification-service/pom.xml    ./notification-service/
+COPY api-gateway/pom.xml             ./api-gateway/
+COPY discovery-server/pom.xml        ./discovery-server/
+COPY config-server/pom.xml           ./config-server/
+
+ARG MODULE
+ENV MODULE=${MODULE}
+
+# Pre-resolve dependencies (cached layer) - then copy sources
+RUN --mount=type=cache,target=/root/.m2 \
+    mvn -B -q -DskipTests -pl ${MODULE} -am dependency:resolve || true
+
+# Copy the module sources and build the JAR
+COPY ${MODULE}/src ./${MODULE}/src
+RUN --mount=type=cache,target=/root/.m2 \
+    mvn -B -q -DskipTests -pl ${MODULE} -am clean package
+
+# ----------------------------------------------------------------------------
+FROM eclipse-temurin:21-jre AS runtime
+WORKDIR /app
+
+ARG MODULE
+ENV MODULE=${MODULE}
+
+# Copy the freshly built Spring Boot executable JAR
+COPY --from=builder /build/${MODULE}/target/${MODULE}-1.0.0-SNAPSHOT.jar /app/app.jar
+
+EXPOSE 8080
+
+# Run as non-root
+RUN useradd -r -u 10001 spring && chown -R spring:spring /app
+USER spring
+
+ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "/app/app.jar"]

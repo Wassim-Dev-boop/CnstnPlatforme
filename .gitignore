@@ -1,0 +1,79 @@
+# Java / Spring Boot
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+replay_pid*
+.mvn/wrapper/maven-wrapper.jar
+HELP.md
+
+# IDE / Editor
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.settings/
+.classpath
+.project
+.fleet/
+*.swp
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# OpenCode / IDE cache
+.sixth/
+
+# GitHub modernization hooks (opencode local, not for repo)
+.github/modernize/
+
+# Logs
+*.log
+logs/
+backend/logs/
+
+# Test outputs
+test-output/
+*.html
+!docs/**/*.html
+
+# Generated PDFs (rebuild with mvn/pdfgen)
+*.pdf
+!docs/**/*.pdf
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# Keycloak dev DB exports
+*.json
+!backend/infra/keycloak/realm-export.json
+!backend/**/migrations/*.json
+!frontend/**/*.json
+
+# Build artifacts
+backend/**/build/
+backend/**/out/
+frontend/.angular/
+frontend/dist/
+
+# IDE workspace
+.fleet/
+*.code-workspace

@@ -1,0 +1,47 @@
+server:
+  port: ${SERVER_PORT:8085}
+
+spring:
+  application:
+    name: intervention-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/intervention_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8090/realms/cnstn-intranet}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  auth-user:
+    base-url: ${AUTH_USER_SERVICE_URL:http://localhost:8081}
+    internal-api-key: ${AUTH_USER_INTERNAL_API_KEY:${NOTIFICATION_INTERNAL_API_KEY:change-me}}
+  intervention:
+    room-manager-recipients:
+      - ${INTERVENTION_ROOM_MANAGER_USERNAME:salle.cnstn}
+    it-manager-recipients:
+      - ${INTERVENTION_MANAGER_USERNAME:chef.cnstn}
+    dsn-recipients:
+      - ${INTERVENTION_DSN_USERNAME:directeur.cnstn}
+    it-responsible-recipients:
+      - ${INTERVENTION_DSN_REFERENT_USERNAME:it.cnstn}

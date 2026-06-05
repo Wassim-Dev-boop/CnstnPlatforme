@@ -1,0 +1,17 @@
+-- ============================================================================
+-- V5: STUBBED - SEED DEMO INTERVENTIONS (intentionally empty)
+-- ============================================================================
+-- Date      : 2026-06-04
+-- Purpose   : Placeholder migration kept for consistency with the
+--              4 other services that all expose a "demo data" seed step.
+--
+-- Why empty :
+--   * intervention-service uses `spring.flyway.enabled = false` and
+--     `spring.jpa.hibernate.ddl-auto = update` (see application.yml).
+--   * The `interventions` table is created/updated by Hibernate from
+--     the JPA entities (see com.cnstn.intervention.entity.*).
+--   * Flyway never executes this file against intervention_db.
+--
+-- When/if Flyway is re-enabled in the future, this file should insert
+-- demo interventions matching the InterventionEntity column layout.
+-- ============================================================================

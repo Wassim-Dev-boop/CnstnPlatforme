@@ -1,0 +1,17 @@
+-- ============================================================================
+-- V2: STUBBED - SEED DEMO NOTIFICATIONS (intentionally empty)
+-- ============================================================================
+-- Date      : 2026-06-04
+-- Purpose   : Placeholder migration kept for consistency with the
+--              4 other services that all expose a "demo data" seed step.
+--
+-- Why empty :
+--   * notification-service uses `spring.flyway.enabled = false` and
+--     `spring.jpa.hibernate.ddl-auto = update` (see application.yml).
+--   * The `notifications` table is created/updated by Hibernate from
+--     the JPA entities (see com.cnstn.notification.entity.*).
+--   * Flyway never executes this file against notification_db.
+--
+-- When/if Flyway is re-enabled in the future, this file should insert
+-- demo notifications matching the NotificationEntity column layout.
+-- ============================================================================

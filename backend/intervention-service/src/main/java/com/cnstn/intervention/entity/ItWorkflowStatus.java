@@ -1,0 +1,16 @@
+package com.cnstn.intervention.entity;
+
+public enum ItWorkflowStatus {
+    SUBMITTED,
+    MANAGER_APPROVAL_PENDING,
+    MANAGER_APPROVED,
+    MANAGER_REJECTED,
+    DSN_APPROVAL_PENDING,
+    DSN_APPROVED,
+    DSN_REJECTED,
+    IT_PROCESSING_PENDING,
+    IT_IN_CHARGE,
+    IT_IN_PROGRESS,
+    IT_RESOLVED,
+    IT_CLOSED
+}

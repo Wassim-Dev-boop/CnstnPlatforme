@@ -1,0 +1,12 @@
+package com.cnstn.authuser.entity;
+
+public enum WorkflowConditionType {
+    TOUJOURS,
+    RESERVATION_PHYSIQUE,
+    EVENEMENT_PRESENTIEL,
+    EVENEMENT_HYBRIDE,
+    PARTENAIRE_EXTERNE,
+    DOCUMENT_CONFIDENTIEL,
+    INTERVENTION_IT,
+    INTERVENTION_CRITIQUE
+}

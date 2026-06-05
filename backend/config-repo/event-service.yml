@@ -1,0 +1,24 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/event_db
+    username: postgres
+    password: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://host.docker.internal:8090/realms/cnstn-intranet}
+app:
+  internal:
+    api-key: ${EVENT_INTERNAL_API_KEY:${NOTIFICATION_INTERNAL_API_KEY:change-me}}
+  reservation:
+    base-url: ${RESERVATION_SERVICE_URL:http://reservation-service:8084}
+    internal-api-key: ${RESERVATION_INTERNAL_API_KEY:${NOTIFICATION_INTERNAL_API_KEY:change-me}}
+  notification:
+    base-url: ${NOTIFICATION_SERVICE_URL:http://notification-service:8086}
+    internal-api-key: ${NOTIFICATION_INTERNAL_API_KEY:change-me}
+  auth-user:
+    base-url: ${AUTH_USER_SERVICE_URL:http://auth-user-service:8081}
+    internal-api-key: ${AUTH_USER_INTERNAL_API_KEY:${NOTIFICATION_INTERNAL_API_KEY:change-me}}

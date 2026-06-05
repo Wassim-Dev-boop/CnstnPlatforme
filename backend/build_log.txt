@@ -1,0 +1,238 @@
+ Image backend-auth-user-service Building 
+ Image backend-discovery-server Building 
+ Image backend-frontend Building 
+ Image backend-config-server Building 
+ Image backend-api-gateway Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.72kB 0.0s done
+#1 DONE 0.0s
+
+#2 [api-gateway internal] load build definition from Dockerfile.service
+#2 transferring dockerfile: 217B 0.1s done
+#2 DONE 0.1s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 386B 0.1s done
+#3 DONE 0.1s
+
+#4 [discovery-server internal] load metadata for docker.io/library/eclipse-temurin:17-jre-noble
+#4 ...
+
+#5 [frontend internal] load metadata for docker.io/library/node:22-alpine
+#5 DONE 0.0s
+
+#4 [auth-user-service internal] load metadata for docker.io/library/eclipse-temurin:17-jre-noble
+#4 DONE 0.3s
+
+#6 [frontend build 1/6] FROM docker.io/library/node:22-alpine
+#6 DONE 0.0s
+
+#7 [frontend runtime 1/3] FROM docker.io/library/nginx:1.27-alpine@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10
+#7 DONE 0.0s
+
+#8 [frontend internal] load metadata for docker.io/library/nginx:1.27-alpine
+#8 DONE 0.3s
+
+#9 [discovery-server internal] load .dockerignore
+#9 transferring context: 2B done
+#9 DONE 0.0s
+
+#10 [frontend internal] load .dockerignore
+#10 transferring context: 116B done
+#10 DONE 0.0s
+
+#11 [auth-user-service 1/3] FROM docker.io/library/eclipse-temurin:17-jre-noble@sha256:c410ffc61fb0e2f3102555c3ca89de7de59177d6eb4593bd5d43d3fb553835b0
+#11 DONE 0.0s
+
+#12 [auth-user-service internal] load build context
+#12 ...
+
+#13 [discovery-server internal] load build context
+#13 transferring context: 162B 0.1s done
+#13 DONE 0.1s
+
+#14 [discovery-server 2/3] WORKDIR /app
+#14 CACHED
+
+#15 [discovery-server 3/3] COPY discovery-server/target/discovery-server-1.0.0-SNAPSHOT.jar app.jar
+#15 CACHED
+
+#16 [discovery-server] exporting to image
+#16 exporting layers done
+#16 writing image sha256:ec093fac2846742a58d5a1403c55b950faab83958aaf7c5eecf7fc1265c1ec10 done
+#16 naming to docker.io/library/backend-discovery-server done
+#16 DONE 0.0s
+
+#17 [config-server internal] load build context
+#17 ...
+
+#18 [frontend build 4/6] RUN npm ci --no-audit --no-fund
+#18 CACHED
+
+#19 [frontend build 5/6] COPY . .
+#19 DONE 0.2s
+
+#20 [frontend internal] load build context
+#20 transferring context: 3.34MB 0.3s done
+#20 DONE 0.4s
+
+#21 [discovery-server] resolving provenance for metadata file
+#21 DONE 0.1s
+
+#17 [config-server internal] load build context
+#17 transferring context: 29.11MB 5.5s
+#17 ...
+
+#22 [api-gateway internal] load build context
+#22 ...
+
+#17 [config-server internal] load build context
+#17 ...
+
+#12 [auth-user-service internal] load build context
+#12 ...
+
+#17 [config-server internal] load build context
+#17 transferring context: 42.71MB 10.5s
+#17 ...
+
+#23 [frontend build 6/6] RUN npm run build
+#23 0.748 
+#23 0.748 > cnstn-intranet-frontend@1.0.3 build
+#23 0.748 > ng build
+#23 0.748 
+#23 2.511 ÔØ» Building...
+#23 ...
+
+#17 [config-server internal] load build context
+#17 transferring context: 44.81MB 11.7s done
+#17 DONE 11.8s
+
+#14 [config-server 2/3] WORKDIR /app
+#14 CACHED
+
+#24 [config-server 3/3] COPY config-server/target/config-server-1.0.0-SNAPSHOT.jar app.jar
+#24 CACHED
+
+#25 [config-server] exporting to image
+#25 exporting layers done
+#25 writing image sha256:50117d4112a99a6acc979ea34a52b0dec5fce5b8d53fa9efdc88203ec28b2639 done
+#25 naming to docker.io/library/backend-config-server 0.0s done
+#25 DONE 0.0s
+
+#12 [auth-user-service internal] load build context
+#12 ...
+
+#26 [config-server] resolving provenance for metadata file
+#26 DONE 0.1s
+
+#12 [auth-user-service internal] load build context
+#12 ...
+
+#22 [api-gateway internal] load build context
+#22 transferring context: 53.24MB 12.9s done
+#22 DONE 12.9s
+
+#14 [api-gateway 2/3] WORKDIR /app
+#14 CACHED
+
+#27 [api-gateway 3/3] COPY api-gateway/target/api-gateway-1.0.0-SNAPSHOT.jar app.jar
+#27 CACHED
+
+#28 [api-gateway] exporting to image
+#28 exporting layers done
+#28 writing image sha256:d35dad116abaf798f935f4d40d87ad799a6079f62e96aabbc6e8c3b45012a42d done
+#28 naming to docker.io/library/backend-api-gateway done
+#28 DONE 0.0s
+
+#12 [auth-user-service internal] load build context
+#12 ...
+
+#29 [api-gateway] resolving provenance for metadata file
+#29 DONE 0.2s
+
+#12 [auth-user-service internal] load build context
+#12 transferring context: 85.83MB 15.2s done
+#12 DONE 15.2s
+
+#14 [auth-user-service 2/3] WORKDIR /app
+#14 CACHED
+
+#30 [auth-user-service 3/3] COPY auth-user-service/target/auth-user-service-1.0.0-SNAPSHOT.jar app.jar
+#30 CACHED
+
+#31 [auth-user-service] exporting to image
+#31 exporting layers done
+#31 writing image sha256:4237fdec390dcdeccaffe4f712faa680f3fa1a421d27827b0f30e7fde26905cd done
+#31 naming to docker.io/library/backend-auth-user-service done
+#31 DONE 0.0s
+
+#32 [auth-user-service] resolving provenance for metadata file
+#32 DONE 0.0s
+
+#23 [frontend build 6/6] RUN npm run build
+#23 31.82 Ô£ö Building...
+#23 31.82 Initial chunk files   | Names          |  Raw size | Estimated transfer size
+#23 31.82 main-GA5G5XAV.js      | main           |   1.67 MB |               331.86 kB
+#23 31.82 scripts-G4N5QY4M.js   | scripts        | 580.14 kB |               129.66 kB
+#23 31.82 styles-XPVTUFUG.css   | styles         | 168.50 kB |                19.75 kB
+#23 31.82 polyfills-5CFQRCPP.js | polyfills      |  34.59 kB |                11.33 kB
+#23 31.82 chunk-4ILFSBDO.js     | -              |   1.93 kB |               731 bytes
+#23 31.82 chunk-6OM6ZIKR.js     | -              |   1.79 kB |               800 bytes
+#23 31.82 
+#23 31.82                       | Initial total  |   2.46 MB |               494.14 kB
+#23 31.82 
+#23 31.82 Lazy chunk files      | Names          |  Raw size | Estimated transfer size
+#23 31.82 chunk-YRLT7UT2.js     | apexcharts-esm | 577.45 kB |               129.31 kB
+#23 31.82 chunk-TPR24SOY.js     | worldLow       | 245.55 kB |                61.85 kB
+#23 31.82 chunk-FTKKMMP4.js     | index          | 179.68 kB |                38.56 kB
+#23 31.82 chunk-BSB5QXOM.js     | xy             | 179.08 kB |                34.33 kB
+#23 31.82 chunk-NEBSO6CH.js     | -              | 144.83 kB |                31.30 kB
+#23 31.82 chunk-IDFH4ILO.js     | hierarchy      | 104.34 kB |                25.13 kB
+#23 31.82 chunk-2RA3RYUJ.js     | flow           |  84.06 kB |                20.80 kB
+#23 31.82 chunk-EWSV2AJL.js     | map            |  47.52 kB |                11.12 kB
+#23 31.82 chunk-XRQKFEOS.js     | -              |  31.76 kB |                10.97 kB
+#23 31.82 chunk-T5HYKELR.js     | -              |  16.68 kB |                 4.04 kB
+#23 31.82 chunk-3WBPSARI.js     | -              |  15.61 kB |                 4.54 kB
+#23 31.82 chunk-6EZ6KP6G.js     | -              |  14.55 kB |                 5.01 kB
+#23 31.82 chunk-UGSL4ORD.js     | -              |  11.63 kB |                 4.22 kB
+#23 31.82 chunk-CY5BXCDQ.js     | -              |   8.47 kB |                 1.88 kB
+#23 31.82 chunk-4J2SWYMH.js     | -              |   7.11 kB |                 1.84 kB
+#23 31.82 ...and 6 more lazy chunks files. Use "--verbose" to show all the files.
+#23 31.82 
+#23 31.82 Application bundle generation failed. [29.307 seconds] - 2026-05-19T11:21:38.801Z
+#23 31.82 
+#23 31.83 Ôû▓ [WARNING] src/app/pages/public-home/public-home.component.css exceeded maximum budget. Budget 4.00 kB was not met by 5.23 kB with a total of 9.23 kB.
+#23 31.83 
+#23 31.83 
+#23 31.83 Ôû▓ [WARNING] Module 'd3-voronoi-treemap' used by 'node_modules/@amcharts/amcharts5/.internal/charts/hierarchy/VoronoiTreemap.js' is not ESM
+#23 31.83 
+#23 31.83   CommonJS or AMD dependencies can cause optimization bailouts.
+#23 31.83   For more information see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+#23 31.83 
+#23 31.83 
+#23 31.83 Ôû▓ [WARNING] Module 'seedrandom' used by 'node_modules/@amcharts/amcharts5/.internal/charts/hierarchy/VoronoiTreemap.js' is not ESM
+#23 31.83 
+#23 31.83   CommonJS or AMD dependencies can cause optimization bailouts.
+#23 31.83   For more information see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+#23 31.83 
+#23 31.83 
+#23 31.83 Ô£ÿ [ERROR] src/app/pages/public-home/public-home.component.css exceeded maximum budget. Budget 8.00 kB was not met by 1.23 kB with a total of 9.23 kB.
+#23 31.83 
+#23 31.83 
+#23 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+------
+ > [frontend build 6/6] RUN npm run build:
+31.83 
+31.83 Ôû▓ [WARNING] Module 'seedrandom' used by 'node_modules/@amcharts/amcharts5/.internal/charts/hierarchy/VoronoiTreemap.js' is not ESM
+31.83 
+31.83   CommonJS or AMD dependencies can cause optimization bailouts.
+31.83   For more information see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+31.83 
+31.83 
+31.83 Ô£ÿ [ERROR] src/app/pages/public-home/public-home.component.css exceeded maximum budget. Budget 8.00 kB was not met by 1.23 kB with a total of 9.23 kB.
+31.83 
+31.83 
+------
+target frontend: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+
